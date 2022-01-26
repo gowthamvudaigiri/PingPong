@@ -1,3 +1,4 @@
+import random
 import time
 from turtle import Screen
 
@@ -13,6 +14,10 @@ class PingPong():
         self.DrawGameObjects()
         self.StartMovingComputerPaddle= False
         self.BallDirection = "Forward"
+        self.RandomComputerPaddlePosition = random.randint(0,4)
+        self.AccurateHits =0
+        self.RandomAccurateHits =random.randint(1,5)
+        self.RandomYcor =0
 
     def DrawGameObjects(self):
         PingPongGameObject = PingPongNet()
@@ -34,9 +39,11 @@ class PingPong():
         self.PingPongBallObject.MovePingPongBall(Direction)
 
     def MoveComputerPaddle(self):
-
-        BallYCor = self.PingPongBallObject.ycor()
-        self.PingPongPaddleObject.MoveComputerPaddle(int(BallYCor))
+        if self.AccurateHits > self.RandomAccurateHits:
+            BallYCor = self.PingPongBallObject.ycor()+ 100
+        else:
+            BallYCor = self.PingPongBallObject.ycor()
+        self.PingPongPaddleObject.MoveComputerPaddle(int(BallYCor), self.RandomComputerPaddlePosition)
 
     def CalculatePaddleToBallDistance(self):
         for PaddleType in self.PingPongPaddleObject.Paddle :
@@ -45,8 +52,12 @@ class PingPong():
                     self.PingPongBallObject.seth(self.PingPongPaddleObject.SetBallAngle[_])
                     if PaddleType == "Player":
                         self.StartMovingComputerPaddle = True
+                        self.RandomComputerPaddlePosition = random.randint(0, 4)
+                        if self.AccurateHits > self.RandomAccurateHits :
+                            self.RandomYcor = random.randint(-400, 400)
                     else:
                         self.StartMovingComputerPaddle = False
+                        self.AccurateHits +=1
 
                     if PaddleType == "Player":
                         self.BallDirection = "Forward"
@@ -63,19 +74,21 @@ class PingPong():
             self.PingPongPaddleObject.RestetPaddle()
             self.StartMovingComputerPaddle = False
             self.BallDirection = "Forward"
+            self.AccurateHits =0
+            self.RandomAccurateHits = random.randint(1, 5)
             time.sleep(1)
 
         if self.PingPongBallObject.ycor() >= 400 :
             if self.BallDirection =="Forward":
-                self.PingPongBallObject.seth(240)
+                self.PingPongBallObject.seth(random.randint(220,240))
             else:
-                self.PingPongBallObject.seth(120)
+                self.PingPongBallObject.seth(random.randint(100,120))
 
         if  self.PingPongBallObject.ycor() <= -400 :
             if self.BallDirection =="Forward":
-                self.PingPongBallObject.seth(120)
+                self.PingPongBallObject.seth(random.randint(100,120))
             else:
-                self.PingPongBallObject.seth(240)
+                self.PingPongBallObject.seth(random.randint(220, 240))
 
 
 

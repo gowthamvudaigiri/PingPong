@@ -4,8 +4,8 @@ class PingPongScoreBoard(Turtle):
         super().__init__()
         self.ComputerScore =-1
         self.PlayerScore =-1
-        self.DrawScoreBoardMethods = [self.reset, self.pencolor, self.penup, self.goto, self.write, self.goto, self.write,
-                                      self.ht]
+        self.DrawScoreBoardMethods = [self.reset, self.pencolor, self.penup, self.goto, self.write, self.goto,
+                                      self.write, self.ht]
 
         self.DrawScoreBoardParameters = ["", "white", "", (-200, 300), [str(self.ComputerScore), ('Arial', 72, 'bold')],
                                          (200, 300), [str(self.PlayerScore), ('Arial', 72, 'bold')], ""]
@@ -27,4 +27,8 @@ class PingPongScoreBoard(Turtle):
                 self.write(self.DrawScoreBoardParameters[_][0], font=self.DrawScoreBoardParameters[_][1])
             else:
                 self.DrawScoreBoardMethods[_](self.DrawScoreBoardParameters[_])
+
+    def PrintResult(self, Result):
+        self.goto(-150, -75)
+        self.write(Result , font =('Arial', 72, 'bold'))
 

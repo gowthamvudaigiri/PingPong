@@ -18,10 +18,10 @@ class PingPongBall(Turtle):
         self.MovePingPongBall("Forward")
 
     def GenerateRandomXYCordinates(self):
-        return (random.randint(-60, 100), random.randint(-60, 0))
+        return (random.randint(-120, -60), random.randint(-60, 0))
 
     def MovePingPongBall(self, Direction):
         if Direction == "Forward":
-            self.forward(4)
+            self.forward(5)
         else:
-            self.backward(4)
+            self.backward(5)

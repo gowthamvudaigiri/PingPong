@@ -38,13 +38,12 @@ class PingPongPaddle:
                 self.Paddle[PaddleType][_].goto(self.Paddle[PaddleType][_-1].xcor(), self.Paddle[PaddleType][_-1].ycor())
             self.Paddle[PaddleType][0].forward(20)
 
-    def MoveComputerPaddle(self, BallYCor):
-        RandPixels = [0,20,40,60,80,100, 120, 140, -20,40,-60,-80,-100,-120,-140]
-        RandDistance =int(float(BallYCor/20)) * 20 #+ int(random.choice(RandPixels))
-        if self.Paddle["Computer"][0].ycor() > BallYCor:
+    def MoveComputerPaddle(self, BallYCor, PaddlePosition):
+        RandDistance =int(float(BallYCor/20)) * 20
+        if self.Paddle["Computer"][PaddlePosition].ycor() > RandDistance:
             #while self.Paddle["Computer"][0].ycor() > RandDistance:
                 self.MovePLayerPaddleDown("Computer")
-        if self.Paddle["Computer"][4].ycor() < BallYCor:
+        if self.Paddle["Computer"][PaddlePosition].ycor() < RandDistance:
             #while self.Paddle["Computer"][4].ycor() < RandDistance:
                 self.MovePLayerPaddleUp("Computer")
 
